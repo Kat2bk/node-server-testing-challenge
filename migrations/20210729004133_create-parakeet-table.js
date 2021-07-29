@@ -1,8 +1,7 @@
 
-exports.up =  async function(knex) {
-  await knex.schema.createTable('adopted', table => {
+exports.up =  function(knex) {
+  return knex.schema.createTable('adopted', table => {
       table.increments();
-      table.string('name', 20).notNullable().unique()
       table.string('adoptee', 20).notNullable()
       table.string('location', 50).notNullable()
       table.integer('phone_number', 10).notNullable()
@@ -23,7 +22,7 @@ exports.up =  async function(knex) {
   })
 };
 
-exports.down = async function(knex) {
-  await knex.schema.dropTableIfExists('parakeets')
-  .dropTableIfExists('adopted')
+exports.down = function(knex) {
+  return knex.schema.dropTableIfExists('parakeets')
+    .dropTableIfExists('adopted')
 };
