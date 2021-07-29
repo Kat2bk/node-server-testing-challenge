@@ -1,55 +1,30 @@
 // Update with your config settings.
 
-module.exports = {
 
-  development: {
+
+  const configuration = {
     client: 'sqlite3',
-    connection: {
-      filename: './migrations/dogs.db3'
+    useNullAsDefault: true,
+    migrations: {
+      directory: './migrations',
+    },
+    seeds: {
+      directory: './seeds',
     },
     pool: {
       afterCreate: (conn, done) => {
         conn.run('PRAGMA foreign_keys = ON', done);
       },
-    },
-    migrations: {
-      directory: './migrations'
-    },
-    seeds: {
-      directory: './seeds',
-    },
   },
+}
 
-  staging: {
-    client: 'postgresql',
-    connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
+  module.exports = {
+    development: {
+      ...configuration,
+      connection: {filename: './migrations/parakeets.db3'},
     },
-    pool: {
-      min: 2,
-      max: 10
+    testing: {
+      ...configuration,
+      connection: {filename: './migrations/testing.db3'},
     },
-    migrations: {
-      tableName: 'knex_migrations'
-    }
-  },
-
-  production: {
-    client: 'postgresql',
-    connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
-    },
-    pool: {
-      min: 2,
-      max: 10
-    },
-    migrations: {
-      tableName: 'knex_migrations'
-    }
   }
-
-};
