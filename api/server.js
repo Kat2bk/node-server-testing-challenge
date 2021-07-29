@@ -1,7 +1,6 @@
 const express = require('express');
 const helmet = require('helmet');
-
-// const dogsRouter = require('../api/dogs/')
+const parakeetRouter = require('./parakeets/parakeet-router');
 
 const server = express();
 
@@ -9,7 +8,7 @@ server.use(express.json());
 server.use(helmet());
 
 
-// dogsRouter here
+server.use('/api/parakeets', parakeetRouter)
 
 server.get('/', (req, res) => {
     res.send('API is up and running!')
